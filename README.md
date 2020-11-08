@@ -1,2 +1,2 @@
-# cookiecutter-dl
-Cookiecutter Template for Deep Learning
+# cookiecutter-mvtec
+Cookiecutter Template for Unsupervised Anomaly Detection on MVTec AD Dataset
