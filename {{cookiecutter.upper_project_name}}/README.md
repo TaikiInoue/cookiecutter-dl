@@ -119,27 +119,30 @@ PyTorch re-implementation of
 
 <br>
 
-## 4. Usage (WIP)
-```
-git clone git@github.com:TaikiInoue/{{cookiecutter.upper_project_name}}.git
-cd {{cookiecutter.upper_project_name}}
-```
+## 4. Usage
 
+a) Download docker image and run docker container
 ```
 docker pull taikiinoue45/mvtec:{{cookiecutter.lower_project_name}}
+docker run --runtime nvidia -it --workdir /app --network host taikiinoue45/mvtec:{{cookiecutter.lower_project_name}} /usr/bin/zsh
 ```
 
+b) Download this repository
 ```
-docker run --runtime nvidia -it taikiinoue45/mvtec:{{cookiecutter.lower_project_name}} /usr/bin/zsh
+git clone https://github.com/taikiinoue45/{{cookiecutter.upper_project_name}}.git
+cd /app/{{cookiecutter.upper_project_name}}/{{cookiecutter.lower_project_name}}
 ```
 
+c) Run experiments
 ```
 sh run.sh
 ```
 
+d) Visualize experiments
 ```
 mlflow ui
 ```
+
 
 <br>
 

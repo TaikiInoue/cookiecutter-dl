@@ -1,18 +1,34 @@
+import logging
 import os
+import sys
 
 import hydra
+import mlflow
 from omegaconf import DictConfig
 
 from {{cookiecutter.lower_project_name}}.runner import Runner
 
 
-@hydra.main(config_path="yamls", config_name="config")
+log = logging.getLogger(__name__)
+
+config_path = sys.argv[1]
+sys.argv.pop(1)
+
+
+@hydra.main(config_path)
 def main(cfg: DictConfig) -> None:
 
-    os.rename(".hydra", "hydra")
+    mlflow.set_tracking_uri(cfg.params.tracking_uri)
+    mlflow.set_experiment(cfg.params.experiment_name)
+    mlflow.start_run(run_name=cfg.params.run_name)
+    mlflow.log_params(cfg.params)
+    mlflow.log_param("cwd", os.getcwd())
 
     runner = Runner(cfg)
-    runner.inference()
+    runner.run()
+
+    mlflow.log_artifacts(".hydra", "hydra")
+    mlflow.log_artifacts("epochs", "epochs")
 
 
 if __name__ == "__main__":
