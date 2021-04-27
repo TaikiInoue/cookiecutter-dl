@@ -1,12 +1,8 @@
-from {{cookiecutter.lower_project_name}}.runner import BaseRunner
+from mvtec.builder import Builder
+from omegaconf.dictconfig import DictConfig
 
 
-class Runner(BaseRunner):
-    def _train(self, epoch: int) -> None:
-        pass
+class Runner(Builder):
+    def __init__(self, cfg: DictConfig) -> None:
 
-    def _validate(self, epoch: int) -> float:
-        pass
-
-    def _test(self, epoch: int) -> None:
-        pass
+        super().__init__()
